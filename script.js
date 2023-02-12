@@ -24,12 +24,19 @@ function startGame() {
         labelName_player2.innerHTML = `Player-2 : ${player2.value}`;
         startInfo.innerHTML = ""
     }
+
 }
 
 function resetGame() {
     grid_box.style.display = "none";
     player1.style.display = "block";
     player2.style.display = "block";
+    for (let i = 0; i < cells.length; i++) {
+        cells[i].innerHTML = "";
+    }
+    result.textContent = "";
+    player1Array = [];
+    player2Array = [];
 }
 
 for (let i = 0; i < cells.length; i++) {
@@ -77,6 +84,10 @@ function checkCombination(players_array, currentPlayer) {
     ];
     for (let i = 0; i < winningComobination.length; i++) {
         const combination = winningComobination[i];
+        if (player1Array.length + player2Array.length == 9) {
+
+            return;
+        }
         if (combination.every(index => players_array.includes(index))) {
             showResult(currentPlayer);
             return;
